@@ -1,3 +1,0 @@
-## Credit for illustrations authors
-
-

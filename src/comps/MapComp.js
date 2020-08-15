@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {getLocation } from './utils';
-import L from 'leaflet';
+import L, { marker, popup } from 'leaflet';
 import nextId from 'react-id-generator';
-import { Map, TileLayer, Marker, Popup, LeafletConsumer } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import '../../node_modules/leaflet/dist/leaflet.css';
 
 const Icon = L.icon({
@@ -21,6 +21,7 @@ const MapComp = () => {
         zoom: 3
     });
     const [markers, setMarkers] = useState([]);
+
     useEffect(() => {
         getLocation().then(location => {
             setLocation({
@@ -28,7 +29,8 @@ const MapComp = () => {
                 zoom: 13
             });
         })
-    }, [])
+    }, []);
+    
     const addMarker = e => {
         let data = { 
             lat: e.latlng.lat.toFixed(6),
@@ -36,7 +38,9 @@ const MapComp = () => {
             id: nextId()
         };
         setMarkers([...markers, data]);
-        console.log(markers);
+    }
+    const openPopup = e => {
+        console.log(e);
     }
     return (
         <Map className="map-wrapper" center={location.location} zoom={location.zoom} onClick={addMarker}>
@@ -45,8 +49,8 @@ const MapComp = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             { markers && markers.map((position, index) => 
-                    <Marker draggable={true} position={position} key={index} icon={Icon}>
-                    <Popup >
+                    <Marker onadd={openPopup} position={position} marker_index={index} key={index} icon={Icon}>
+                    <Popup onOpen={openPopup}> 
                         <form className="form-wrapper">
                             <select required>
                                 <option value="Nu s-a selectat tipul problemei">Selectați tipul problemei</option>
