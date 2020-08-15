@@ -1,10 +1,10 @@
 import React from 'react';
-import Map from './comps/Map';
+import MapComp from './comps/MapComp';
 
 function App() {
   return (
     <div className="App">
-      <Map />
+      <MapComp/>
     </div>
   );
 }
