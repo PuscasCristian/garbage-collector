@@ -45,10 +45,25 @@ const MapComp = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             { markers && markers.map((position, index) => 
-                    <Marker position={position} icon={Icon}>
+                    <Marker draggable={true} position={position} key={index} icon={Icon}>
                     <Popup >
-                        Cosul de gunoi a fost marcat plin de catre Anonim. <br />
-                        Camionul de la salubritate este pe drum.
+                        <form className="form-wrapper">
+                            <select required>
+                                <option value="Nu s-a selectat tipul problemei">Selectați tipul problemei</option>
+                                <option value="cos_stalp">Cos de stalp plin</option>
+                                <option value="container_plin">Container plin</option>
+                                <option value="container_sticla">Container sticle plin</option>
+                                <option value="container_hartie">Container hartie plin</option>
+                                <option value="container_plastic">Container plastic plin</option>
+                                <option value="container_textile">Container textile plin</option>
+                                <option value="gunoaie_gramada">Morman de gunoaie in natura</option>
+                            </select>
+                            <textarea placeholder="Descrie problema"/>
+                            <input type="file" placeholder="Incarca imagine" accept=".jpg,.png,.jpeg" capture multiple></input>
+                            <button>Trimite</button>
+
+                        </form>
+                        
                     </Popup>
                 </Marker>
             )}

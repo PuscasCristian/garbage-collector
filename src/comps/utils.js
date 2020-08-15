@@ -18,3 +18,6 @@ export function getLocation() {
       });
     });
   }
+export function getMessage() {
+    
+}
