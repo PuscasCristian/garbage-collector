@@ -4,6 +4,7 @@ import L, { marker, popup } from 'leaflet';
 import nextId from 'react-id-generator';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import '../../node_modules/leaflet/dist/leaflet.css';
+import PopUpModal from './PopUpModal';
 
 const Icon = L.icon({
     iconUrl: 'https://firebasestorage.googleapis.com/v0/b/garbage-overflown.appspot.com/o/icon-marker-garbage-overflown.svg?alt=media&token=fccbad3d-4ce3-4744-a65d-4474fb1d0c53',
@@ -43,7 +44,7 @@ const MapComp = () => {
         console.log(e);
     }
     return (
-        <Map className="map-wrapper" center={location.location} zoom={location.zoom} onClick={addMarker}>
+        <Map className="map-wrapper" center={location.location} zoom={location.zoom} ondblclick={addMarker} >
             <TileLayer
                 attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -51,27 +52,12 @@ const MapComp = () => {
             { markers && markers.map((position, index) => 
                     <Marker onadd={openPopup} position={position} marker_index={index} key={index} icon={Icon}>
                     <Popup onOpen={openPopup}> 
-                        <form className="form-wrapper">
-                            <select required>
-                                <option value="Nu s-a selectat tipul problemei">Selectați tipul problemei</option>
-                                <option value="cos_stalp">Cos de stalp plin</option>
-                                <option value="container_plin">Container plin</option>
-                                <option value="container_sticla">Container sticle plin</option>
-                                <option value="container_hartie">Container hartie plin</option>
-                                <option value="container_plastic">Container plastic plin</option>
-                                <option value="container_textile">Container textile plin</option>
-                                <option value="gunoaie_gramada">Morman de gunoaie in natura</option>
-                            </select>
-                            <textarea placeholder="Descrie problema"/>
-                            <input type="file" placeholder="Incarca imagine" accept=".jpg,.png,.jpeg" capture multiple></input>
-                            <button>Trimite</button>
-
-                        </form>
-                        
+                        <h4>My name is Flasch</h4>
                     </Popup>
                 </Marker>
-            )}
-           
+            )}                        
+            <PopUpModal />
+
         </Map>
     )
 }
